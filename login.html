@@ -1,0 +1,152 @@
+<html>
+    <head>
+        <title>loginpage</title>
+        <style>
+            body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height:100vh;
+}
+
+.container {
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+        </style>
+    </head>
+    <body>
+        
+        <div class="container">
+            <div id="login-form" class="form-container">
+                <h2>Login</h2>
+                <form onsubmit="return loginUser(event)">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" required>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a></p>
+            </div>
+    
+            <div id="registration-form" class="form-container hidden">
+                <h2>Register</h2>
+                <form onsubmit="return registerUser(event)">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" required>
+                    <label for="register-confirm-password">Confirm Password:</label>
+                    <input type="password" id="register-confirm-password" required>
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+            </div>
+        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    showLoginForm();
+});
+
+function showLoginForm() {
+    document.getElementById('login-form').classList.add('active');
+    document.getElementById('registration-form').classList.remove('active');
+}
+
+function showRegistrationForm() {
+    document.getElementById('login-form').classList.remove('active');
+    document.getElementById('registration-form').classList.add('active');
+}
+
+function loginUser(event) {
+    event.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    // Add your login logic here (e.g., API call)
+
+    console.log('Logging in with:', { email, password });
+    alert('Login successful!');
+
+    return false;
+}
+
+function registerUser(event) {
+    event.preventDefault();
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    const confirmPassword = document.getElementById('register-confirm-password').value;
+
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return false;
+    }
+
+    // Add your registration logic here (e.g., API call)
+
+    console.log('Registering with:', { email, password });
+    alert('Registration successful!');
+
+    showLoginForm();
+    return false;
+}
+    </script>
+    </body>
+</html>
